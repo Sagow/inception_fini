@@ -1,0 +1,9 @@
+FROM linux:alpine
+LABEL author="mdelwaul"
+RUN apt-get update \
+	&& apt-get install -y nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY service_start.sh /home/docker/script/service_start.sh
+RUN chmod 744 /home/docker/script/service_start.sh
+ENTRYPOINT /home/docker/script/service_start.sh
+WORKDIR /home/docker

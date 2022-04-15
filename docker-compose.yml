@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: inception/nginx
+    build:
+      context: nginx
+  
+  wordPressPHP:
+    image: inception/wordPressPHP
+    build:
+      context: wordPressPHP
+
+  MariaDB:
+    image: inception/MariaDB
+    build:
+      context: MariaDB
