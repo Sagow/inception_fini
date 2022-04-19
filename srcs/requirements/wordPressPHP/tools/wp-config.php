@@ -25,13 +25,13 @@
 define( 'DB_NAME', 'wordpress' );
 
 /** Utilisateur de la base de données MySQL. */
-define( 'DB_USER', 'user42' );
+define( 'DB_USER', 'marina' );
 
 /** Mot de passe de la base de données MySQL. */
-define( 'DB_PASSWORD', 'USER42@password' );
+define( 'DB_PASSWORD', 'mdpMarina' );
 
 /** Adresse de l’hébergement MySQL. */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Jeu de caractères à utiliser par la base de données lors de la création des tables. */
 define( 'DB_CHARSET', 'utf8mb4' );

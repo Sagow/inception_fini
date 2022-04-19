@@ -13,7 +13,9 @@ fdown:
 	@rm -rf ~/data
 
 clean:
-	docker-compose down --rmi all
-	
+	cd srcs && docker-compose down --rmi all
+
+config:
+	cd srcs && docker-compose config
 
 .PHONY: up down fdown clean

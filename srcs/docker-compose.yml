@@ -7,28 +7,32 @@ networks:
 volumes:
   MariaDB_data:
     name: mariaDB
-    driver: bridge
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/mdelwaul/data/
+    # driver: bridge
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: /sgoinfre/goinfre/Perso/mdelwaul/data_mb
   wordPressPHP_data:
     name: wp
-    driver: bridge
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/mdelwaul/data
+    # driver: bridge
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: /sgoinfre/goinfre/Perso/mdelwaul/data_wp
 
 services:
   nginx:
+    depends_on:
+      - wordpress
     image: nginx
     container_name: nginx
     ports:
-      - "443:443"
+      - "4433:443"
     networks:
       - localhost
     restart: unless-stopped
+    volumes:
+      - wordPressPHP_data:/var/www/wordpress
     build: ./requirements/nginx
   
   wordpress:
@@ -38,21 +42,26 @@ services:
       - localhost
     depends_on:
       - mariadb
-      - nginx
     volumes:
-      - wordPressPHP_data:/var/www/html
+      - wordPressPHP_data:/var/www/wordpress
     restart: unless-stopped
-    build: ./requirements/wordPressPHP --build-arg ADMIN_USER="correcteur" --build-arg ADMIN_PW=mdpcorrecteur --build-arg ADMIN_email=correcteur@student.42.fr
+    environment:
+      - ADMIN_USER=correcteur
+      - ADMIN_PW=mdpcorrecteur
+      - ADMIN_email=correcteur@student.42.fr
+    ports:
+      - "9000:9000"
+    build: ./requirements/wordPressPHP
 
   mariadb:
     image: mariadb
     container_name: mariadb
     networks:
       - localhost
-    depends_on:
-      - nginx
     volumes:
       - MariaDB_data:/var/lib/mysql
     restart: unless-stopped
+    expose:
+      - "3306"
     build: ./requirements/MariaDB
 

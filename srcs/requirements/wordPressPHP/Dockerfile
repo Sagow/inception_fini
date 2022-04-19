@@ -14,7 +14,7 @@ ENV ADMIN_USER=user
 ENV ADMIN_PW=pw
 ENV ADMIN_EMAIL=user@email.com
 ENV BUILD_DIR=/tmp/build/
-RUN mkdir ${BUILD_DIR}}
+RUN mkdir ${BUILD_DIR}
 
 RUN mkdir -p /run/php
 
@@ -32,4 +32,4 @@ RUN chmod 777 wp-cli.phar && \
 
 EXPOSE 9000
 
-CMD cp -a ${BUILD_DIR}. /var/www/ && wp-cli core install --allow-root --title="Wordpress" --admin_name=${ADMIN_USER}} --admin_password=${ADMIN_PW}}} --admin_email=${ADMIN_EMAIL}} --path="/var/www/wordpress/" --url="https://localhost/" && php-fpm7.3 -F -R
+CMD cp -a ${BUILD_DIR}. /var/www/ && wp-cli core install --allow-root --title="Wordpress" --admin_name=${ADMIN_USER} --admin_password=${ADMIN_PW} --admin_email=${ADMIN_EMAIL} --path="/var/www/wordpress/" --url="https://localhost:4433/" && php-fpm7.3 -F -R
