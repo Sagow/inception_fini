@@ -4,25 +4,19 @@ LABEL mdelwaul <mdelwaul@student.42.fr>
 
 RUN apt-get update && \
 	apt-get upgrade -y
+RUN apt-get -qq install mariadb-server -y
+RUN mkdir -p /run/mysql
+EXPOSE 3306
 
 WORKDIR /tmp/mariadb/
-
-#copie tous les fichiers neessaires
-COPY tools/ /tmp/mariadb/
-
-RUN mkdir -p /run/mysql
-
-RUN apt-get -qq install mariadb-server -y
-
-RUN service mysql start && mariadb -u root < /tmp/mariadb/setup.sql
 
 #permet d'accepter les connexions de n'importe quel host
 RUN 	sed 's/bind-address            = 127.0.0.1/bind-address            = 0.0.0.0/'\
 		 -i /etc/mysql/mariadb.conf.d/50-server.cnf
 
-RUN mkdir temp_mysql/
-RUN cp -r /var/lib/mysql/* temp_mysql
+#copie tous les fichiers neessaires
+COPY tools/ /tmp/mariadb/
 
-EXPOSE 3306
+RUN service mysql start && cat setup_db.sql setup.sql | mariadb -u root
 
-CMD cp -r temp_mysql/* /var/lib/mysql/ && mysqld
+CMD mysqld
