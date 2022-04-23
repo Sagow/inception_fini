@@ -47,7 +47,9 @@ services:
     restart: unless-stopped
     environment:
       - ADMIN_USER=correcteur
-      - ADMIN_PW=mdpcorrecteur
+      - ADMIN_PW=mdpcorrecteur4*
+      - USER_USER=user
+      - USER_PW=mdpUser4*
       - ADMIN_email=correcteur@student.42.fr
     ports:
       - "9000:9000"
