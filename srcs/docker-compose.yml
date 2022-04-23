@@ -11,14 +11,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/mdelwaul/data
+      device: /home/mdelwaul/data/mysql
   wordPressPHP_data:
     # name: wp
     # driver: bridge
     driver_opts:
       o: bind
       type: none
-      device: /home/mdelwaul/data
+      device: /home/mdelwaul/data/wordpress
 
 services:
   nginx:
