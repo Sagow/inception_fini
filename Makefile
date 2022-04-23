@@ -5,11 +5,11 @@ up:
 	cd srcs && docker-compose up --build -d --remove-orphans && cd ..
 
 down:
-	cd srcs && docker-compose down -t 2 && cd ..
+	cd srcs && docker-compose down && cd ..
 	@rm -rf ~/data/mariadb
 
 fdown:
-	cd srcs && docker-compose down -t 2 -v && cd ..
+	cd srcs && docker-compose down -v && cd ..
 	@rm -rf ~/data
 
 clean:

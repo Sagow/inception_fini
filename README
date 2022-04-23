@@ -3,7 +3,7 @@ make down : stoppe les containers, peuvent etre relances sans perte de la basede
 make fdown : down + suppression des volumes
 make clean : supprime les images
 
-Pour se connecter, aller sur https://localhost:4433 et https://localhost:4433/wp-login.php
+Pour se connecter, aller sur https://localhost:443 et https://localhost:443/wp-login
 
 admin :
 identifiant : correcteur

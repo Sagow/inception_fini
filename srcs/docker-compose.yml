@@ -6,19 +6,19 @@ networks:
 
 volumes:
   MariaDB_data:
-    name: mariaDB
+    # name: mariaDB
     # driver: bridge
-    # driver_opts:
-    #   o: bind
-    #   type: none
-    #   device: /sgoinfre/goinfre/Perso/mdelwaul/data_mb
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mdelwaul/data
   wordPressPHP_data:
-    name: wp
+    # name: wp
     # driver: bridge
-    # driver_opts:
-    #   o: bind
-    #   type: none
-    #   device: /sgoinfre/goinfre/Perso/mdelwaul/data_wp
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mdelwaul/data
 
 services:
   nginx:
@@ -27,7 +27,7 @@ services:
     image: nginx
     container_name: nginx
     ports:
-      - "4433:443"
+      - "443:443"
     networks:
       - localhost
     restart: unless-stopped
@@ -46,11 +46,11 @@ services:
       - wordPressPHP_data:/var/www/wordpress
     restart: unless-stopped
     environment:
-      - ADMIN_USER=correcteur
-      - ADMIN_PW=mdpcorrecteur4*
-      - USER_USER=user
-      - USER_PW=mdpUser4*
-      - ADMIN_email=correcteur@student.42.fr
+      - ADMIN_USER=${ADMIN_USER_ENV}
+      - ADMIN_PW=${ADMIN_PW_ENV}
+      - USER_USER=${USER_USER_ENV}
+      - USER_PW=${USER_PW_ENV}
+      - ADMIN_email=${ADMIN_email_ENV}
     ports:
       - "9000:9000"
     build: ./requirements/wordPressPHP
