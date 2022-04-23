@@ -1,0 +1,16 @@
+make (up) : cree et lance les containers
+make down : stoppe les containers, peuvent etre relances sans perte de la basede donnee
+make fdown : down + suppression des volumes
+make clean : supprime les images
+
+Pour se connecter, aller sur https://localhost:4433 et https://localhost:4433/wp-login.php
+
+admin :
+identifiant : correcteur
+mdp : mdpCorrecteur4*
+
+second user :
+identifiant : user
+mdp : mdpUser4*
+
+Pour configurer le nom de domaine, il faut modifier /etc/hosts ou utiliser la commande hostname, mais j'ai pas les droits
